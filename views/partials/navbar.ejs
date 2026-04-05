@@ -1,0 +1,103 @@
+<nav class="bg-white shadow-md">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center py-4">
+      <div class="flex items-center">
+        <a href="/" class="text-xl font-bold text-blue-600 flex items-center">
+          <i class="fas fa-calendar-check mr-2"></i>
+          <span>Leave Manager</span>
+        </a>
+      </div>
+      
+      <div class="hidden md:flex items-center space-x-1">
+        <% if (user.role === 'employee') { %>
+          <a href="/employee/dashboard" class="px-3 py-2 rounded-md text-sm font-medium <%= locals.page === 'dashboard' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+            Dashboard
+          </a>
+          <a href="/employee/leave-balance" class="px-3 py-2 rounded-md text-sm font-medium <%= locals.page === 'leave-balance' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+            Leave Balance
+          </a>
+          <a href="/employee/apply-leave" class="px-3 py-2 rounded-md text-sm font-medium <%= locals.page === 'apply-leave' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+            Apply for Leave
+          </a>
+          <a href="/employee/leave-applications" class="px-3 py-2 rounded-md text-sm font-medium <%= locals.page === 'leave-applications' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+            My Applications
+          </a>
+          <a href="/employee/donate-leave" class="px-3 py-2 rounded-md text-sm font-medium <%= locals.page === 'donate-leave' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+            Donate Leave
+          </a>
+        <% } else if (user.role === 'manager') { %>
+          <a href="/manager/dashboard" class="px-3 py-2 rounded-md text-sm font-medium <%= locals.page === 'dashboard' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+            Dashboard
+          </a>
+          <a href="/manager/leave-applications" class="px-3 py-2 rounded-md text-sm font-medium <%= locals.page === 'leave-applications' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+            Leave Applications
+          </a>
+          <a href="/manager/employees" class="px-3 py-2 rounded-md text-sm font-medium <%= locals.page === 'employees' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+            Employees
+          </a>
+        <% } %>
+      </div>
+      
+      <div class="flex items-center">
+        <div class="hidden md:flex items-center pr-4 border-r border-gray-300">
+          <div class="text-sm">
+            <div class="font-medium text-gray-700"><%= user.name %></div>
+            <div class="text-gray-500"><%= user.role.charAt(0).toUpperCase() + user.role.slice(1) %></div>
+          </div>
+        </div>
+        <a href="/logout" class="ml-4 px-4 py-2 rounded-md bg-red-100 text-red-800 text-sm font-medium hover:bg-red-200 transition duration-300">
+          Logout
+        </a>
+      </div>
+      
+      <div class="md:hidden flex items-center">
+        <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div id="mobile-menu" class="md:hidden hidden pb-4">
+      <% if (user.role === 'employee') { %>
+        <a href="/employee/dashboard" class="block px-3 py-2 rounded-md text-base font-medium <%= locals.page === 'dashboard' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+          Dashboard
+        </a>
+        <a href="/employee/leave-balance" class="block px-3 py-2 rounded-md text-base font-medium <%= locals.page === 'leave-balance' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+          Leave Balance
+        </a>
+        <a href="/employee/apply-leave" class="block px-3 py-2 rounded-md text-base font-medium <%= locals.page === 'apply-leave' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+          Apply for Leave
+        </a>
+        <a href="/employee/leave-applications" class="block px-3 py-2 rounded-md text-base font-medium <%= locals.page === 'leave-applications' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+          My Applications
+        </a>
+        <a href="/employee/donate-leave" class="block px-3 py-2 rounded-md text-base font-medium <%= locals.page === 'donate-leave' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+          Donate Leave
+        </a>
+      <% } else if (user.role === 'manager') { %>
+        <a href="/manager/dashboard" class="block px-3 py-2 rounded-md text-base font-medium <%= locals.page === 'dashboard' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+          Dashboard
+        </a>
+        <a href="/manager/leave-applications" class="block px-3 py-2 rounded-md text-base font-medium <%= locals.page === 'leave-applications' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+          Leave Applications
+        </a>
+        <a href="/manager/employees" class="block px-3 py-2 rounded-md text-base font-medium <%= locals.page === 'employees' ? 'bg-blue-100 text-blue-800' : 'text-gray-700 hover:bg-gray-100' %> transition duration-300">
+          Employees
+        </a>
+      <% } %>
+      <div class="pt-4 pb-3 border-t border-gray-200">
+        <div class="flex items-center px-3">
+          <div class="text-base">
+            <div class="font-medium text-gray-800"><%= user.name %></div>
+            <div class="text-gray-500"><%= user.role.charAt(0).toUpperCase() + user.role.slice(1) %></div>
+          </div>
+        </div>
+        <div class="mt-3">
+          <a href="/logout" class="block px-3 py-2 rounded-md text-base font-medium text-red-700 hover:bg-red-100 transition duration-300">
+            Logout
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

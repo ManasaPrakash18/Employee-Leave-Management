@@ -1,0 +1,65 @@
+<form action="/register" method="POST" class="space-y-4">
+  <div>
+    <label for="name" class="block text-sm font-medium text-gray-700">Full name</label>
+    <input type="text" id="name" name="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+  </div>
+  
+  <div>
+    <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+    <input type="email" id="email" name="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+  </div>
+  
+  <div>
+    <label for="department" class="block text-sm font-medium text-gray-700">Department</label>
+    <select id="department" name="department" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+      <option value="">Select Department</option>
+      <option value="Engineering">Engineering</option>
+      <option value="HR">HR</option>
+      <option value="Finance">Finance</option>
+      <option value="Marketing">Marketing</option>
+      <option value="Operations">Operations</option>
+      <option value="Sales">Sales</option>
+    </select>
+  </div>
+  
+  <div>
+    <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+    <select id="role" name="role" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+      <option value="employee">Employee</option>
+      <option value="manager">Manager</option>
+    </select>
+  </div>
+  
+  <div>
+    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+    <input type="password" id="password" name="password" required minlength="6" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+  </div>
+  
+  <div>
+    <label for="password2" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+    <input type="password" id="password2" name="password2" required minlength="6" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+  </div>
+  
+  <div>
+    <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300">
+      Register
+    </button>
+  </div>
+</form>
+
+<div class="mt-6">
+  <div class="relative">
+    <div class="absolute inset-0 flex items-center">
+      <div class="w-full border-t border-gray-300"></div>
+    </div>
+    <div class="relative flex justify-center text-sm">
+      <span class="px-2 bg-white text-gray-500">Already have an account?</span>
+    </div>
+  </div>
+  
+  <div class="mt-6">
+    <a href="/login" class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300">
+      Login
+    </a>
+  </div>
+</div>

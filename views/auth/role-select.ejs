@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Role | Leave Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-gradient-to-r from-blue-500 to-teal-400 min-h-screen flex items-center justify-center p-4">
+  <div class="max-w-4xl w-full">
+    <div class="text-center mb-8 text-white">
+      <h1 class="text-4xl font-bold mb-2">Welcome to Leave Management System</h1>
+      <p class="text-xl">Please select how you want to continue</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a href="/login?role=employee" class="bg-white rounded-lg shadow-xl p-8 hover:transform hover:scale-105 transition-transform duration-300">
+        <div class="text-center">
+          <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-user-tie text-3xl text-blue-600"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">Login as Employee</h2>
+          <p class="text-gray-600">Apply for leave, check balance, and donate leave to colleagues</p>
+          <div class="mt-6">
+            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+              Continue as Employee
+            </span>
+          </div>
+        </div>
+      </a>
+      
+      <a href="/login?role=manager" class="bg-white rounded-lg shadow-xl p-8 hover:transform hover:scale-105 transition-transform duration-300">
+        <div class="text-center">
+          <div class="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-user-shield text-3xl text-teal-600"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">Login as Manager</h2>
+          <p class="text-gray-600">Review leave applications and manage department employees</p>
+          <div class="mt-6">
+            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700">
+              Continue as Manager
+            </span>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    <div class="text-center mt-8">
+      <p class="text-white">Don't have an account? <a href="/register" class="font-medium underline">Register here</a></p>
+    </div>
+  </div>
+</body>
+</html>

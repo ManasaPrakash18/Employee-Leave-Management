@@ -1,0 +1,212 @@
+<div class="bg-white p-6 rounded-lg shadow-md">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Donation History</h1>
+    <a href="/employee/donate-leave" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+      <i class="fas fa-hand-holding-heart mr-2"></i> Donate Leave
+    </a>
+  </div>
+  
+  <div class="mb-6">
+    <ul class="flex flex-wrap border-b border-gray-200">
+      <li class="mr-1">
+        <a href="#" class="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active" id="all-tab" data-tab="all">
+          All Donations
+        </a>
+      </li>
+      <li class="mr-1">
+        <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="outgoing-tab" data-tab="outgoing">
+          Donated by Me
+        </a>
+      </li>
+      <li class="mr-1">
+        <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="incoming-tab" data-tab="incoming">
+          Received by Me
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+  <% if (donations && donations.length > 0) { %>
+    <div id="all-content" class="tab-content">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">From</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">To</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Leave Type</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Days</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <% donations.forEach(donation => { %>
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= donation.donatedDate.toLocaleDateString() %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="font-medium text-gray-900"><%= donation.fromUserName %></span>
+                  <% if (donation.fromEmployeeId === user.id) { %>
+                    <span class="text-xs text-gray-500 ml-1">(You)</span>
+                  <% } %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="font-medium text-gray-900"><%= donation.toUserName %></span>
+                  <% if (donation.toEmployeeId === user.id) { %>
+                    <span class="text-xs text-gray-500 ml-1">(You)</span>
+                  <% } %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="capitalize text-gray-900"><%= donation.leaveType %></span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="text-gray-900"><%= donation.days %> days</span>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div id="outgoing-content" class="tab-content hidden">
+      <% const outgoingDonations = donations.filter(d => d.isOutgoing); %>
+      <% if (outgoingDonations.length > 0) { %>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Recipient</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Leave Type</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Days</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <% outgoingDonations.forEach(donation => { %>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <%= donation.donatedDate.toLocaleDateString() %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="font-medium text-gray-900"><%= donation.toUserName %></span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="capitalize text-gray-900"><%= donation.leaveType %></span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="text-gray-900"><%= donation.days %> days</span>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } else { %>
+        <div class="text-center py-8 bg-gray-50 rounded-lg">
+          <div class="text-5xl text-gray-300 mb-4">
+            <i class="fas fa-hand-holding"></i>
+          </div>
+          <h3 class="text-lg font-medium text-gray-700 mb-2">No outgoing donations</h3>
+          <p class="text-gray-500 mb-4">You haven't donated any leave days yet</p>
+          <a href="/employee/donate-leave" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+            Donate Leave
+          </a>
+        </div>
+      <% } %>
+    </div>
+    
+    <div id="incoming-content" class="tab-content hidden">
+      <% const incomingDonations = donations.filter(d => !d.isOutgoing); %>
+      <% if (incomingDonations.length > 0) { %>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">From</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Leave Type</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Days</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <% incomingDonations.forEach(donation => { %>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <%= donation.donatedDate.toLocaleDateString() %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="font-medium text-gray-900"><%= donation.fromUserName %></span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="capitalize text-gray-900"><%= donation.leaveType %></span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="text-gray-900"><%= donation.days %> days</span>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } else { %>
+        <div class="text-center py-8 bg-gray-50 rounded-lg">
+          <div class="text-5xl text-gray-300 mb-4">
+            <i class="fas fa-hand-holding-medical"></i>
+          </div>
+          <h3 class="text-lg font-medium text-gray-700 mb-2">No incoming donations</h3>
+          <p class="text-gray-500">You haven't received any leave donations yet</p>
+        </div>
+      <% } %>
+    </div>
+  <% } else { %>
+    <div class="text-center py-8 bg-gray-50 rounded-lg">
+      <div class="text-5xl text-gray-300 mb-4">
+        <i class="fas fa-exchange-alt"></i>
+      </div>
+      <h3 class="text-lg font-medium text-gray-700 mb-2">No donation history</h3>
+      <p class="text-gray-500 mb-6">There are no leave donations yet</p>
+      <a href="/employee/donate-leave" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+        Donate Leave
+      </a>
+    </div>
+  <% } %>
+  
+  <div class="mt-8">
+    <a href="/employee/dashboard" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+      <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+    </a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('[data-tab]');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Hide all tab contents
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.add('hidden');
+        });
+        
+        // Remove active class from all tabs
+        tabs.forEach(t => {
+          t.classList.remove('text-blue-600', 'border-blue-600');
+          t.classList.add('hover:text-gray-600', 'hover:border-gray-300', 'border-transparent');
+        });
+        
+        // Add active class to clicked tab
+        this.classList.add('text-blue-600', 'border-blue-600');
+        this.classList.remove('hover:text-gray-600', 'hover:border-gray-300', 'border-transparent');
+        
+        // Show corresponding content
+        const tabName = this.getAttribute('data-tab');
+        document.getElementById(`${tabName}-content`).classList.remove('hidden');
+      });
+    });
+  });
+</script>

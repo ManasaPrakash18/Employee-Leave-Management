@@ -1,0 +1,96 @@
+<div class="bg-white p-6 rounded-lg shadow-md">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">Apply for Leave</h1>
+  
+  <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 mb-6">
+    <h2 class="text-lg font-medium text-gray-800 mb-2">Available Leave Balance</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div>
+        <div class="text-sm font-medium text-gray-500">Annual</div>
+        <div class="text-xl font-bold text-blue-700"><%= leaveBalance.annual %> days</div>
+      </div>
+      <div>
+        <div class="text-sm font-medium text-gray-500">Sick</div>
+        <div class="text-xl font-bold text-green-700"><%= leaveBalance.sick %> days</div>
+      </div>
+      <div>
+        <div class="text-sm font-medium text-gray-500">Casual</div>
+        <div class="text-xl font-bold text-purple-700"><%= leaveBalance.casual %> days</div>
+      </div>
+      <div>
+        <div class="text-sm font-medium text-gray-500">Compensatory</div>
+        <div class="text-xl font-bold text-yellow-700"><%= leaveBalance.compensatory %> days</div>
+      </div>
+    </div>
+  </div>
+  
+  <form action="/employee/apply-leave" method="POST">
+    <div class="space-y-6">
+      <div>
+        <label for="leaveType" class="block text-sm font-medium text-gray-700">Leave Type</label>
+        <select id="leaveType" name="leaveType" required class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+          <option value="" disabled selected>Select Leave Type</option>
+          <option value="annual">Annual Leave</option>
+          <option value="sick">Sick Leave</option>
+          <option value="casual">Casual Leave</option>
+          <option value="compensatory">Compensatory Leave</option>
+        </select>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="startDate" class="block text-sm font-medium text-gray-700">Start Date</label>
+          <input type="date" name="startDate" id="startDate" required class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+        </div>
+        
+        <div>
+          <label for="endDate" class="block text-sm font-medium text-gray-700">End Date</label>
+          <input type="date" name="endDate" id="endDate" required class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+        </div>
+      </div>
+      
+      <div>
+        <label for="reason" class="block text-sm font-medium text-gray-700">Reason for Leave</label>
+        <textarea id="reason" name="reason" rows="4" required class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+      </div>
+      
+      <div class="flex justify-end">
+        <a href="/employee/dashboard" class="mr-4 inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          Cancel
+        </a>
+        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          Submit Application
+        </button>
+      </div>
+    </div>
+  </form>
+  
+  <div class="mt-8 bg-gray-50 p-4 rounded-lg border border-gray-200">
+    <h3 class="text-md font-medium text-gray-800 mb-2">Important Note</h3>
+    <p class="text-sm text-gray-600">
+      Please submit your leave application at least 3 days in advance (except for emergencies).
+      Your application will be sent to your department manager for approval.
+      You will receive an email notification once your application has been reviewed.
+    </p>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+    
+    // Set min date to today
+    const today = new Date().toISOString().split('T')[0];
+    startDateInput.setAttribute('min', today);
+    
+    // Update end date min when start date changes
+    startDateInput.addEventListener('change', function() {
+      endDateInput.setAttribute('min', this.value);
+      
+      // If end date is before start date, reset it
+      if (endDateInput.value && endDateInput.value < this.value) {
+        endDateInput.value = this.value;
+      }
+    });
+  });
+</script>

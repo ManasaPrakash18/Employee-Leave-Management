@@ -1,0 +1,198 @@
+<div class="bg-white p-6 rounded-lg shadow-md">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Leave Application Details</h1>
+    <div>
+      <% if (leave.status === 'pending') { %>
+        <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+          Pending
+        </span>
+      <% } else if (leave.status === 'approved') { %>
+        <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+          Approved
+        </span>
+      <% } else { %>
+        <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+          Rejected
+        </span>
+      <% } %>
+    </div>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+    <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+      <h2 class="text-lg font-medium text-gray-800 mb-4">Employee Information</h2>
+      <div class="space-y-3">
+        <div>
+          <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider">Name</h3>
+          <p class="text-base font-medium text-gray-800"><%= employee.name %></p>
+        </div>
+        <div>
+          <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider">Email</h3>
+          <p class="text-base font-medium text-gray-800"><%= employee.email %></p>
+        </div>
+        <div>
+          <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider">Department</h3>
+          <p class="text-base font-medium text-gray-800"><%= employee.department %></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+      <h2 class="text-lg font-medium text-gray-800 mb-4">Leave Details</h2>
+      <div class="space-y-3">
+        <div>
+          <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider">Leave Type</h3>
+          <p class="text-base font-medium text-gray-800 capitalize"><%= leave.leaveType %> Leave</p>
+        </div>
+        <div>
+          <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</h3>
+          <p class="text-base font-medium text-gray-800">
+            <%= leave.startDate.toDateString() %> to <%= leave.endDate.toDateString() %>
+            (<%= Math.ceil(Math.abs(new Date(leave.endDate) - new Date(leave.startDate)) / (1000 * 60 * 60 * 24)) + 1 %> days)
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider">Applied On</h3>
+          <p class="text-base font-medium text-gray-800"><%= leave.appliedDate.toDateString() %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
+    <h2 class="text-lg font-medium text-gray-800 mb-4">Reason for Leave</h2>
+    <div class="p-4 bg-white rounded border border-gray-200">
+      <p class="text-gray-800"><%= leave.reason %></p>
+    </div>
+  </div>
+  
+  <% if (leave.status === 'pending') { %>
+    <div class="bg-yellow-50 p-6 rounded-lg border border-yellow-100 mb-8">
+      <h2 class="text-lg font-medium text-gray-800 mb-4">Review Application</h2>
+      <form action="/manager/leave-applications/<%= leave.id %>" method="POST">
+        <div class="space-y-4">
+          <div>
+            <label for="status" class="block text-sm font-medium text-gray-700">Decision</label>
+            <div class="mt-1">
+              <div class="flex space-x-4">
+                <div class="flex items-center">
+                  <input id="approve" name="status" type="radio" value="approved" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+                  <label for="approve" class="ml-2 block text-sm text-gray-700">Approve</label>
+                </div>
+                <div class="flex items-center">
+                  <input id="reject" name="status" type="radio" value="rejected" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300">
+                  <label for="reject" class="ml-2 block text-sm text-gray-700">Reject</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <label for="comments" class="block text-sm font-medium text-gray-700">Comments (Optional)</label>
+            <div class="mt-1">
+              <textarea id="comments" name="comments" rows="3" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Add any comments about your decision..."></textarea>
+            </div>
+          </div>
+          
+          <div class="flex justify-end pt-2">
+            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" id="submit-review">
+              Submit Review
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  <% } else { %>
+    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
+      <h2 class="text-lg font-medium text-gray-800 mb-4">Review Details</h2>
+      <div class="space-y-3">
+        <div>
+          <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider">Status</h3>
+          <p class="text-base font-medium <%= leave.status === 'approved' ? 'text-green-600' : 'text-red-600' %> capitalize">
+            <%= leave.status %>
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider">Reviewed On</h3>
+          <p class="text-base font-medium text-gray-800"><%= leave.reviewedDate.toDateString() %></p>
+        </div>
+        <% if (leave.comments) { %>
+          <div>
+            <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider">Comments</h3>
+            <div class="mt-1 p-3 bg-white rounded border border-gray-200">
+              <p class="text-gray-800"><%= leave.comments %></p>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+  
+  <div class="flex justify-between">
+    <a href="/manager/leave-applications" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+      <i class="fas fa-arrow-left mr-2"></i> Back to Applications
+    </a>
+    <a href="/manager/employees/<%= employee.id %>" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+      View Employee Profile <i class="fas fa-user ml-2"></i>
+    </a>
+  </div>
+</div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const approveRadio = document.getElementById('approve');
+      const rejectRadio = document.getElementById('reject');
+      const submitButton = document.getElementById('submit-review');
+      const form = submitButton.closest('form');
+      
+      if (submitButton) {
+        submitButton.addEventListener('click', async function(e) {
+          e.preventDefault();
+          if (!approveRadio.checked && !rejectRadio.checked) {
+            alert('Please select either Approve or Reject');
+            return;
+          }
+          
+          submitButton.disabled = true;
+          submitButton.textContent = 'Submitting...';
+          
+          const formData = new FormData(form);
+          const status = formData.get('status');
+          const comments = formData.get('comments');
+          
+          try {
+            const response = await fetch(form.action, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({ status, comments })
+            });
+            
+            if (!response.ok) {
+              const errorData = await response.json();
+              throw new Error(errorData.error || 'Failed to update leave status');
+            }
+            
+            // Update leave counts dynamically
+            // Removed event dispatch because page redirects immediately after update
+            // const leaveCountsResponse = await fetch('/manager/api/leave-counts');
+            // if (leaveCountsResponse.ok) {
+            //   const data = await leaveCountsResponse.json();
+            //   const event = new CustomEvent('leaveCountsUpdated', { detail: data.counts });
+            //   document.dispatchEvent(event);
+            // }
+            
+            alert('Leave application updated successfully');
+            window.location.href = '/manager/dashboard';
+          } catch (error) {
+            alert(error.message);
+          } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Submit Review';
+          }
+        });
+      }
+    });
+  </script>

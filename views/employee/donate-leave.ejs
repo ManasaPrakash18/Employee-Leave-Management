@@ -1,0 +1,100 @@
+<div class="bg-white p-6 rounded-lg shadow-md">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">Donate Leave (Happy Hours)</h1>
+  
+  <div class="bg-orange-50 p-6 rounded-lg border border-orange-100 mb-8">
+    <div class="flex items-start">
+      <div class="flex-shrink-0 h-12 w-12 bg-orange-500 rounded-full flex items-center justify-center text-white">
+        <i class="fas fa-hand-holding-heart text-xl"></i>
+      </div>
+      <div class="ml-4">
+        <h2 class="text-lg font-medium text-gray-800">About Happy Hours</h2>
+        <p class="mt-1 text-sm text-gray-600">
+          Happy Hours allows you to donate your leave days to colleagues who might need them due to emergencies
+          or extended leave requirements. Your contribution makes a difference!
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <form action="/employee/donate-leave" method="POST">
+    <div class="space-y-6">
+      <div>
+        <label for="toEmployeeId" class="block text-sm font-medium text-gray-700">Select Colleague</label>
+        <select id="toEmployeeId" name="toEmployeeId" required class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+          <option value="" disabled selected>Select a colleague</option>
+          <% if (colleagues && colleagues.length > 0) { %>
+            <% colleagues.forEach(colleague => { %>
+              <option value="<%= colleague.id %>"><%= colleague.name %></option>
+            <% }); %>
+          <% } else { %>
+            <option value="" disabled>No colleagues available</option>
+          <% } %>
+        </select>
+      </div>
+      
+      <div>
+        <label for="leaveType" class="block text-sm font-medium text-gray-700">Leave Type to Donate</label>
+        <select id="leaveType" name="leaveType" required class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+          <option value="" disabled selected>Select Leave Type</option>
+          <option value="annual">Annual Leave</option>
+          <option value="sick">Sick Leave</option>
+          <option value="casual">Casual Leave</option>
+          <option value="compensatory">Compensatory Leave</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="days" class="block text-sm font-medium text-gray-700">Number of Days</label>
+        <input type="number" id="days" name="days" min="1" max="30" required class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+        <p class="mt-1 text-sm text-gray-500">You can donate a maximum of 30 days at once</p>
+      </div>
+      
+      <div class="flex justify-end">
+        <a href="/employee/dashboard" class="mr-4 inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          Cancel
+        </a>
+        <button type="submit" class="mr-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          Donate Leave
+        </button>
+      </div>
+    </div>
+  </form>
+  
+  <div class="mt-8">
+    <a href="/employee/donation-history" class="text-blue-600 hover:text-blue-800 inline-flex items-center">
+      <i class="fas fa-history mr-2"></i> View Donation History
+    </a>
+  </div>
+  
+  <div class="mt-8 bg-gray-50 p-4 rounded-lg border border-gray-200">
+    <h3 class="text-md font-medium text-gray-800 mb-2">Happy Hours Guidelines</h3>
+    <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+      <li>You can donate from any type of leave you have available</li>
+      <li>The minimum donation is 1 day</li>
+      <li>Your colleague will receive an email notification about your donation</li>
+      <li>Donated leave cannot be reclaimed</li>
+      <li>Your donation will be visible in your donation history</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const leaveTypeSelect = document.getElementById('leaveType');
+    const daysInput = document.getElementById('days');
+    const leaveBalance = JSON.parse('<%- JSON.stringify(leaveBalance) %>');
+    
+    leaveTypeSelect.addEventListener('change', function() {
+      const selectedType = this.value;
+      const maxDays = leaveBalance[selectedType];
+      
+      daysInput.max = maxDays;
+      daysInput.placeholder = `Max ${maxDays} days available`;
+      
+      // If current value is greater than max, reset it
+      if (parseInt(daysInput.value) > maxDays) {
+        daysInput.value = maxDays;
+      }
+    });
+  });
+</script>

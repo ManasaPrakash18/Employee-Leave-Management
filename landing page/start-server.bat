@@ -1,0 +1,6 @@
+@echo off
+echo Starting local server...
+echo Please wait...
+start http://localhost:8000
+python -m http.server 8000
+pause 

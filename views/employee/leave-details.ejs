@@ -1,0 +1,98 @@
+<div class="bg-white p-6 rounded-lg shadow-md">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Leave Application Details</h1>
+    <div>
+      <% if (leave.status === 'pending') { %>
+        <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+          Pending
+        </span>
+      <% } else if (leave.status === 'approved') { %>
+        <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+          Approved
+        </span>
+      <% } else { %>
+        <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+          Rejected
+        </span>
+      <% } %>
+    </div>
+  </div>
+  
+  <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+      <div>
+        <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Leave Type</h3>
+        <p class="text-base font-medium text-gray-800 capitalize"><%= leave.leaveType %> Leave</p>
+      </div>
+      
+      <div>
+        <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Total Days</h3>
+        <p class="text-base font-medium text-gray-800">
+          <%= Math.ceil(Math.abs(new Date(leave.endDate) - new Date(leave.startDate)) / (1000 * 60 * 60 * 24)) + 1 %> days
+        </p>
+      </div>
+      
+      <div>
+        <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Start Date</h3>
+        <p class="text-base font-medium text-gray-800"><%= leave.startDate.toDateString() %></p>
+      </div>
+      
+      <div>
+        <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">End Date</h3>
+        <p class="text-base font-medium text-gray-800"><%= leave.endDate.toDateString() %></p>
+      </div>
+      
+      <div>
+        <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Applied On</h3>
+        <p class="text-base font-medium text-gray-800"><%= leave.appliedDate.toDateString() %></p>
+      </div>
+      
+      <div>
+        <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Application ID</h3>
+        <p class="text-base font-medium text-gray-800 break-all"><%= leave.id %></p>
+      </div>
+    </div>
+    
+    <div class="mt-6">
+      <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Reason</h3>
+      <div class="mt-1 p-4 bg-white rounded border border-gray-200">
+        <p class="text-gray-800"><%= leave.reason %></p>
+      </div>
+    </div>
+    
+    <% if (leave.status !== 'pending') { %>
+      <div class="mt-6">
+        <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Review Details</h3>
+        <div class="mt-1 p-4 bg-white rounded border border-gray-200">
+          <p class="text-sm text-gray-600 mb-2">
+            <span class="font-medium">Status:</span> 
+            <span class="<%= leave.status === 'approved' ? 'text-green-600' : 'text-red-600' %> font-medium capitalize">
+              <%= leave.status %>
+            </span>
+          </p>
+          <p class="text-sm text-gray-600 mb-2">
+            <span class="font-medium">Reviewed On:</span> <%= leave.reviewedDate.toDateString() %>
+          </p>
+          <% if (leave.comments) { %>
+            <p class="text-sm text-gray-600 mb-2">
+              <span class="font-medium">Comments:</span>
+            </p>
+            <p class="text-gray-800 italic"><%= leave.comments %></p>
+          <% } %>
+        </div>
+      </div>
+    <% } %>
+  </div>
+  
+  <div class="flex justify-between">
+    <a href="/employee/leave-applications" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+      <i class="fas fa-arrow-left mr-2"></i> Back to Applications
+    </a>
+    
+    <% if (leave.status === 'pending') { %>
+      <span class="text-sm text-yellow-600">
+        <i class="fas fa-clock mr-1"></i> Waiting for approval
+      </span>
+    <% } %>
+  </div>
+</div>

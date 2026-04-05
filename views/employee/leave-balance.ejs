@@ -1,0 +1,110 @@
+<div class="bg-white p-6 rounded-lg shadow-md">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">Leave Balance</h1>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 h-12 w-12 bg-blue-500 rounded-full flex items-center justify-center text-white">
+          <i class="fas fa-plane-departure text-xl"></i>
+        </div>
+        <div class="ml-4">
+          <h2 class="text-lg font-medium text-gray-800">Annual Leave</h2>
+          <div class="mt-1 text-3xl font-bold text-blue-700"><%= leaveBalance.annual %> days</div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-gray-600">
+          Annual leave can be used for vacations and personal time off.
+        </p>
+      </div>
+    </div>
+    
+    <div class="bg-green-50 p-6 rounded-lg border border-green-100">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 h-12 w-12 bg-green-500 rounded-full flex items-center justify-center text-white">
+          <i class="fas fa-notes-medical text-xl"></i>
+        </div>
+        <div class="ml-4">
+          <h2 class="text-lg font-medium text-gray-800">Sick Leave</h2>
+          <div class="mt-1 text-3xl font-bold text-green-700"><%= leaveBalance.sick %> days</div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-gray-600">
+          Sick leave can be used when you are ill or for medical appointments.
+        </p>
+      </div>
+    </div>
+    
+    <div class="bg-purple-50 p-6 rounded-lg border border-purple-100">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 h-12 w-12 bg-purple-500 rounded-full flex items-center justify-center text-white">
+          <i class="fas fa-coffee text-xl"></i>
+        </div>
+        <div class="ml-4">
+          <h2 class="text-lg font-medium text-gray-800">Casual Leave</h2>
+          <div class="mt-1 text-3xl font-bold text-purple-700"><%= leaveBalance.casual %> days</div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-gray-600">
+          Casual leave can be used for short notice absences and personal emergencies.
+        </p>
+      </div>
+    </div>
+    
+    <div class="bg-yellow-50 p-6 rounded-lg border border-yellow-100">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 h-12 w-12 bg-yellow-500 rounded-full flex items-center justify-center text-white">
+          <i class="fas fa-exchange-alt text-xl"></i>
+        </div>
+        <div class="ml-4">
+          <h2 class="text-lg font-medium text-gray-800">Compensatory</h2>
+          <div class="mt-1 text-3xl font-bold text-yellow-700"><%= leaveBalance.compensatory %> days</div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm text-gray-600">
+          Compensatory leave is earned by working extra hours or on holidays.
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mt-8">
+    <div class="bg-white p-6 rounded-lg border border-gray-200">
+      <h2 class="text-lg font-medium text-gray-800 mb-4">Leave Policy Highlights</h2>
+      <ul class="space-y-2 text-sm text-gray-600">
+        <li class="flex items-start">
+          <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+          <span>Annual leave accrues at <strong>1.67 days per month</strong> (20 days per year)</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+          <span>Sick leave accrues at <strong>0.83 days per month</strong> (10 days per year)</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+          <span>Casual leave is limited to <strong>7 days per year</strong></span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+          <span>Unused annual leave can be <strong>carried forward</strong> to the next year (max 10 days)</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+          <span>Leave applications should be submitted <strong>at least 3 days in advance</strong> (except for emergencies)</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="mt-8 flex justify-between">
+    <a href="/employee/dashboard" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+      <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+    </a>
+    <a href="/employee/apply-leave" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+      Apply for Leave <i class="fas fa-arrow-right ml-2"></i>
+    </a>
+  </div>
+</div>

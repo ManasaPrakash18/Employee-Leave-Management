@@ -1,0 +1,198 @@
+<div class="bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-6xl relative">
+  <div id="threejs-container" class="absolute top-0 left-0 w-full h-full -z-10"></div>
+  <div class="bg-gradient-to-r from-blue-500 to-teal-400 py-12 px-6 md:py-20 md:px-12 text-white text-center relative z-10">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4 animate-fade-in">Employee Leave Management System</h1>
+    <p class="text-lg md:text-xl mb-8 animate-fade-in-delayed">Efficiently manage employee leave applications and approvals</p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-delayed-more">
+      <a href="/login" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition duration-300 transform hover:scale-105">
+        Login to your account
+      </a>
+      <a href="/register" class="px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:bg-opacity-10 transition duration-300 transform hover:scale-105">
+        Create new account
+      </a>
+    </div>
+  </div>
+  
+  <div class="px-6 py-12 md:px-12 bg-white relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div class="p-6 bg-blue-50 rounded-lg hover:shadow-md transition duration-300 transform hover:scale-105 hover:rotate-3d hover:cursor-pointer">
+        <div class="w-16 h-16 mx-auto flex items-center justify-center bg-blue-500 text-white rounded-full mb-4">
+          <i class="fas fa-file-alt text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Apply for Leave</h3>
+        <p class="text-gray-600">Submit leave applications effortlessly with an intuitive interface</p>
+      </div>
+      
+      <div class="p-6 bg-teal-50 rounded-lg hover:shadow-md transition duration-300 transform hover:scale-105 hover:rotate-3d hover:cursor-pointer">
+        <div class="w-16 h-16 mx-auto flex items-center justify-center bg-teal-500 text-white rounded-full mb-4">
+          <i class="fas fa-check-circle text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Quick Approval Process</h3>
+        <p class="text-gray-600">Streamlined approval workflow for managers with email notifications</p>
+      </div>
+      
+      <div class="p-6 bg-orange-50 rounded-lg hover:shadow-md transition duration-300 transform hover:scale-105 hover:rotate-3d hover:cursor-pointer">
+        <div class="w-16 h-16 mx-auto flex items-center justify-center bg-orange-500 text-white rounded-full mb-4">
+          <i class="fas fa-handshake text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Leave Donation</h3>
+        <p class="text-gray-600">Donate leave days to colleagues in need through our Happy Hours feature</p>
+      </div>
+    </div>
+    
+    <div class="mt-16 relative z-10">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">How It Works</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div>
+          <h3 class="text-xl font-semibold text-blue-600 mb-4">For Employees</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <div class="flex-shrink-0 h-6 w-6 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5">1</div>
+              <div>
+                <p class="text-gray-700"><span class="font-semibold">Register an account</span> with your company email</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div class="flex-shrink-0 h-6 w-6 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5">2</div>
+              <div>
+                <p class="text-gray-700"><span class="font-semibold">View your leave balance</span> across different leave types</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div class="flex-shrink-0 h-6 w-6 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5">3</div>
+              <div>
+                <p class="text-gray-700"><span class="font-semibold">Apply for leave</span> by selecting dates, type, and providing a reason</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div class="flex-shrink-0 h-6 w-6 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5">4</div>
+              <div>
+                <p class="text-gray-700"><span class="font-semibold">Receive notifications</span> about application status changes</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div class="flex-shrink-0 h-6 w-6 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5">5</div>
+              <div>
+                <p class="text-gray-700"><span class="font-semibold">Donate leave</span> to colleagues in need through Happy Hours</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-semibold text-teal-600 mb-4">For Managers</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <div class="flex-shrink-0 h-6 w-6 bg-teal-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5">1</div>
+              <div>
+                <p class="text-gray-700"><span class="font-semibold">Register as a manager</span> with department details</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div class="flex-shrink-0 h-6 w-6 bg-teal-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5">2</div>
+              <div>
+                <p class="text-gray-700"><span class="font-semibold">Receive notifications</span> about new leave applications</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div class="flex-shrink-0 h-6 w-6 bg-teal-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5">3</div>
+              <div>
+                <p class="text-gray-700"><span class="font-semibold">Review applications</span> with complete details</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div class="flex-shrink-0 h-6 w-6 bg-teal-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5">4</div>
+              <div>
+                <p class="text-gray-700"><span class="font-semibold">Approve or reject</span> with optional comments</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div class="flex-shrink-0 h-6 w-6 bg-teal-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5">5</div>
+              <div>
+                <p class="text-gray-700"><span class="font-semibold">Monitor department leave</span> for better planning</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="px-6 py-12 md:px-12 bg-gray-50 relative z-10">
+    <div class="text-center mb-12">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Ready to get started?</h2>
+      <p class="text-gray-600 text-lg max-w-2xl mx-auto">Join our leave management system today and experience a streamlined process for managing employee leave applications.</p>
+    </div>
+    
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <a href="/register" class="px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+        Register Now
+      </a>
+      <a href="/login" class="px-8 py-4 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-300 transition duration-300 transform hover:scale-105">
+        Login
+      </a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <script type="module" src="/js/3d-animations.js"></script>
+  <script type="module">
+    import { startAnimation } from '/js/3d-animations.js';
+    startAnimation();
+  </script>
+</div>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  .animate-fade-in-delayed {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.3s forwards;
+  }
+  
+  .animate-fade-in-delayed-more {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.6s forwards;
+  }
+
+  /* 3D hover effect on feature cards */
+  .hover\\:rotate-3d:hover {
+    transform: rotateX(10deg) rotateY(10deg) scale(1.05);
+    transition: transform 0.3s ease;
+  }
+</style>
+
+<style>
+  /* 3D hover effect on feature cards */
+  .hover\\:rotate-3d:hover {
+    transform: rotateX(10deg) rotateY(10deg) scale(1.05);
+    transition: transform 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  .animate-fade-in-delayed {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.3s forwards;
+  }
+  
+  .animate-fade-in-delayed-more {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.6s forwards;
+  }
+</style>
